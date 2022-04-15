@@ -14,7 +14,15 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v2
 
-      - name: Run Trivy in Config mode
+      - name: Trivy - Misconfiguration table
+        uses: aquasecurity/trivy-action@master
+        with:
+          scan-type: 'config'
+          hide-progress: false
+          format: 'table'
+          severity: 'CRITICAL,HIGH,MEDIUM'
+
+      - name: Run Trivy in Config mode to generate SARIF
         uses: aquasecurity/trivy-action@master
         with:
           scan-type: 'config'
